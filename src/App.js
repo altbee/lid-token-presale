@@ -374,6 +374,8 @@ function App() {
             accountDeposit={accountEthDeposit}
             setVal={setDepositVal}
             val={depositVal}
+            hardcap={hardcap}
+            totalEth={totalEth}
             handleClick={handleDeposit}
           />
         </>

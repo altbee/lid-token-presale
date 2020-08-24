@@ -56,3 +56,6 @@ export const infura_ids = [
   '43e49609d519490d9cce0015ff6424b3',
   '2030424d188140d9a45418f0951dbcd7'
 ];
+
+export const referralBP = '250';
+export const basisPoint = '10000';

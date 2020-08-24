@@ -7,6 +7,7 @@ import {
   NumberInputField
 } from '@chakra-ui/core';
 import { shortenDecimal, toBN, toWei, fromWei } from '../utils.js';
+import { referralBP, basisPoint } from '../config';
 
 export default function DepositForm({
   rate,
@@ -14,19 +15,40 @@ export default function DepositForm({
   accountDeposit,
   setVal,
   val,
+  hardcap,
+  totalEth,
   handleClick
 }) {
   const [displayVal, setDisplayVal] = useState('');
-  const [availableMax, setAvailableMax] = useState(toWei('1'));
+
+  const availableByAccountDeposit = toBN(cap).gte(toBN(accountDeposit))
+    ? toBN(cap)
+        .sub(toBN(accountDeposit))
+        .add(
+          toBN(cap)
+            .sub(toBN(accountDeposit))
+            .mul(toBN(referralBP))
+            .div(toBN(basisPoint))
+        )
+    : toBN('1');
+  const availableByTotalDeposit = toBN(hardcap).gte(toBN(totalEth))
+    ? toBN(hardcap)
+        .sub(toBN(totalEth))
+        .add(
+          toBN(hardcap)
+            .sub(toBN(totalEth))
+            .mul(toBN(referralBP))
+            .div(toBN(basisPoint))
+        )
+    : toBN('1');
+  const availableMax =
+    availableByAccountDeposit > availableByTotalDeposit
+      ? availableByTotalDeposit
+      : availableByAccountDeposit;
 
   useEffect(() => {
     if (displayVal !== '' && !isNaN(displayVal)) setVal(toWei(displayVal));
   }, [displayVal]);
-
-  useEffect(() => {
-    if (cap !== '' && !isNaN(cap) && toBN(cap).gte(toBN(accountDeposit)))
-      setAvailableMax(toBN(cap).sub(toBN(accountDeposit)));
-  }, [cap, accountDeposit]);
 
   return (
     <Box
@@ -61,10 +83,11 @@ export default function DepositForm({
             ? '0'
             : shortenDecimal(
                 fromWei(
-                  toBN(fromWei(val))
+                  toBN(val)
                     .mul(toBN(rate))
                     .mul(toBN('10000'))
                     .div(toBN('10250'))
+                    .div(toBN(toWei('1')))
                 )
               )}
         </Text>

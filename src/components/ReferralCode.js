@@ -56,7 +56,7 @@ export default function ReferralCode({
           borderColor="lid.stroke"
           borderRadius="28px"
           w="100%">
-          https://dextrust.lid.sh/#/{address}
+          https://rinkeby.dextrust.lid.sh/#/{address}
         </Text>
       </Box>
       <Grid

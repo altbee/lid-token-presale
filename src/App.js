@@ -22,7 +22,7 @@ import abis from './contracts/abis';
 import theme from './theme';
 
 const web3Modal = new Web3Modal({
-  network: 'mainnet', // optional
+  network: 'rinkeby', // optional
   cacheProvider: true, // optional
   providerOptions // required
 });
@@ -34,7 +34,7 @@ function App() {
   const [address, setAddress] = useState();
   const [provider, setProvider] = useState(
     new Web3.providers.HttpProvider(
-      'https://mainnet.infura.io/v3/' +
+      'https://rinkeby.infura.io/v3/' +
         infura_ids[Math.floor((Math.random() * 100) % 3)]
     )
   );
@@ -97,7 +97,7 @@ function App() {
 
     const multiCallConfig = {
       web3,
-      multicallAddress: '0xeefba1e63905ef1d7acba5a8513c70307c1ce441',
+      multicallAddress: '0x42ad527de7d4e9d9d011ac45b31d8551f8fe9821',
       interval: 10000
     };
 
@@ -163,7 +163,7 @@ function App() {
 
     const multiCallConfig = {
       web3,
-      multicallAddress: '0xeefba1e63905ef1d7acba5a8513c70307c1ce441',
+      multicallAddress: '0x42ad527de7d4e9d9d011ac45b31d8551f8fe9821',
       interval: 10000
     };
 
@@ -341,14 +341,20 @@ function App() {
         accountShares={accountShares}
         maxShares={maxShares}
       />
-      {isPaused && (<>
-        <Text fontSize="36px" textAlign="center" color="lid.brandDark" mt="60px">
-          Presale Paused.
-        </Text>
-        <Text textAlign="center" mb="200px">
-        Please be patient. Upgrades underway.
-        </Text>
-      </>)}
+      {isPaused && (
+        <>
+          <Text
+            fontSize="36px"
+            textAlign="center"
+            color="lid.brandDark"
+            mt="60px">
+            Presale Paused.
+          </Text>
+          <Text textAlign="center" mb="200px">
+            Please be patient. Upgrades underway.
+          </Text>
+        </>
+      )}
       {isActive && isEnded && !isPaused && (
         <Claimer
           accountShares={accountShares}
@@ -372,7 +378,9 @@ function App() {
           />
         </>
       )}
-      {!isActive && !isEnded && !isPaused && <StartTimer expiryTimestamp={startTime} />}
+      {!isActive && !isEnded && !isPaused && (
+        <StartTimer expiryTimestamp={startTime} />
+      )}
       <ReferralCode
         address={address}
         earnedReferrals={earnedReferrals}
@@ -388,13 +396,15 @@ function App() {
         ml="auto"
         mr="auto"
       />
-      {isActive && isEnded && !isPaused (
-        <PresaleCompletion
-          isEnded={isEnded}
-          handleSendToUniswap={handleSendToUniswap}
-          handleIssueTokens={handleIssueTokens}
-        />
-      )}
+      {isActive &&
+        isEnded &&
+        !isPaused(
+          <PresaleCompletion
+            isEnded={isEnded}
+            handleSendToUniswap={handleSendToUniswap}
+            handleIssueTokens={handleIssueTokens}
+          />
+        )}
 
       <Footer />
     </ThemeProvider>

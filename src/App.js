@@ -56,7 +56,7 @@ function App() {
     currentPrice: '0',
     maxDeposit: '0',
     earnedReferrals: '0',
-    referralCount: '0',
+    referralCounts: '0',
     finalEndTime: '0',
     accountRedeemable: '0',
     accountClaimedTokens: '0',
@@ -76,7 +76,7 @@ function App() {
     currentPrice,
     maxDeposit,
     earnedReferrals,
-    referralCount,
+    referralCounts,
     finalEndTime,
     accountRedeemable,
     accountClaimedTokens,
@@ -384,7 +384,7 @@ function App() {
       <ReferralCode
         address={address}
         earnedReferrals={earnedReferrals}
-        referralCount={referralCount}
+        referralCounts={referralCounts}
       />
       <Box
         w="100%"

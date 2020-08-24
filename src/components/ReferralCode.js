@@ -6,7 +6,7 @@ import { shortEther } from '../utils';
 export default function ReferralCode({
   address,
   earnedReferrals,
-  referralCount
+  referralCounts
 }) {
   return (
     <Box
@@ -28,7 +28,7 @@ export default function ReferralCode({
         w="100%"
         mb="20px"
         p="20px">
-        <CopyToClipboard text={'https://dextrust.lid.sh/#/' + address}>
+        <CopyToClipboard text={'https://rinkeby.dextrust.lid.sh/#/' + address}>
           <Button
             display="block"
             color="lid.fgLight"
@@ -76,7 +76,7 @@ export default function ReferralCode({
             Account number of referrals
           </Text>
           <Text fontSize="38px" w="100%" fontWeight="bold">
-            {referralCount}
+            {referralCounts}
           </Text>
         </Box>
         <Box

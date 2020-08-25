@@ -174,7 +174,7 @@ function App() {
         {
           target: addresses.redeemer,
           call: ['accountShares(address)(uint256)', address],
-          returns: [['accountShare', (val) => val.toString()]]
+          returns: [['accountShares', (val) => val.toString()]]
         },
         {
           target: addresses.redeemer,

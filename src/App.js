@@ -398,15 +398,13 @@ function App() {
         ml="auto"
         mr="auto"
       />
-      {isActive &&
-        isEnded &&
-        !isPaused(
-          <PresaleCompletion
-            isEnded={isEnded}
-            handleSendToUniswap={handleSendToUniswap}
-            handleIssueTokens={handleIssueTokens}
-          />
-        )}
+      {isActive && isEnded && !isPaused && (
+        <PresaleCompletion
+          isEnded={isEnded}
+          handleSendToUniswap={handleSendToUniswap}
+          handleIssueTokens={handleIssueTokens}
+        />
+      )}
 
       <Footer />
     </ThemeProvider>
